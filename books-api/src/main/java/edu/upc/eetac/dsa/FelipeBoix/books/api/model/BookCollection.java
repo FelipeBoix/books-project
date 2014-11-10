@@ -1,5 +1,5 @@
 package edu.upc.eetac.dsa.FelipeBoix.books.api.model;
-import java.awt.print.Book;
+//import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
  
@@ -15,11 +15,11 @@ public class BookCollection {
 		return books;
 	}
  
-	public void setStings(List<Book> books) {
+	public void setBooks(List<Book> books) {
 		this.books = books;
 	}
  
-	public void addSting(Book book) {
+	public void add(Book book) {
 		books.add(book);
 	}
 }

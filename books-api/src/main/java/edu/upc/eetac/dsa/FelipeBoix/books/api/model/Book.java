@@ -1,6 +1,10 @@
 package edu.upc.eetac.dsa.FelipeBoix.books.api.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ws.rs.core.Link;
 
 public class Book {
 	
@@ -13,7 +17,7 @@ public class Book {
 	private Date dateprint;
 	private String editorial;
 	
-	
+	private List<Link> links = new ArrayList<Link>();
 	public int getBookid() {
 		return bookid;
 	}
@@ -61,6 +65,16 @@ public class Book {
 	}
 	public void setEditorial(String editorial) {
 		this.editorial = editorial;
+	}
+	public List<Link> getLinks() {
+		return links;
+	}
+	public void setLinks(List<Link> links) {
+		this.links = links;
+	}
+
+	public void add(Link book) {
+		links.add(book);
 	}
 	
 

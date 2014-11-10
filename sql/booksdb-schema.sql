@@ -1,6 +1,5 @@
 drop database if exists booksdb;
 create database booksdb;
-
 use booksdb;
 
 create table users (
@@ -23,7 +22,7 @@ create table user_roles (
 
 create table books (
 	bookid 			int not null auto_increment primary key,
-	title 			varchar(50) not null,
+	tittle 			varchar(50) not null,
 	author				varchar(100) not null,
 	language				varchar(50) not null,
 	edition      varchar(20) not null,
