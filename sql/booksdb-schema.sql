@@ -10,6 +10,7 @@ create table users (
 );
 
 create table author (
+	id int not null auto_increment primary key,
 	username varchar(20) not null
 );
 

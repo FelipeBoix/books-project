@@ -66,7 +66,7 @@ public class Book {
 	public void setEditorial(String editorial) {
 		this.editorial = editorial;
 	}
-	public List<Link> getLinks() {
+	/*public List<Link> getLinks() {
 		return links;
 	}
 	public void setLinks(List<Link> links) {
@@ -75,7 +75,7 @@ public class Book {
 
 	public void add(Link book) {
 		links.add(book);
-	}
+	}*/
 	
 
 }
