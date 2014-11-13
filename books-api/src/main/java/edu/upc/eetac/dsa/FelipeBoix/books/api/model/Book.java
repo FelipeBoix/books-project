@@ -16,6 +16,7 @@ public class Book {
 	private Date editiondate;
 	private Date dateprint;
 	private String editorial;
+	List<Reviews> reviews= new ArrayList<Reviews>();
 	
 	private List<Link> links = new ArrayList<Link>();
 	public int getBookid() {
@@ -66,16 +67,21 @@ public class Book {
 	public void setEditorial(String editorial) {
 		this.editorial = editorial;
 	}
-	/*public List<Link> getLinks() {
+	public List<Reviews> getReviews() {
+		return reviews;
+	}
+	public void addReviews(Reviews review) {
+		reviews.add(review);
+	}
+	public void setReviews(List<Reviews> review) {
+		this.reviews= review;
+	}
+	public List<Link> getLinks() {
 		return links;
 	}
 	public void setLinks(List<Link> links) {
 		this.links = links;
 	}
-
-	public void add(Link book) {
-		links.add(book);
-	}*/
 	
 
 }
