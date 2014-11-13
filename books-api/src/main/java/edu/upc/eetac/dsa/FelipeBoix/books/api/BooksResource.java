@@ -21,7 +21,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.ServerErrorException;
+import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.EntityTag;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
@@ -224,51 +227,35 @@ public class BooksResource {
 	@GET
 	@Path("/{bookid}")
 	@Produces(MediaType.BOOKS_API_BOOK)
-	public Book getBook(@PathParam("bookid") int id) {
-		Book book = new Book();
-		Connection conn= null;
-		try {
-			conn = ds.getConnection();
-		} catch (SQLException e) {
-			throw new ServerErrorException("Could not connect to the database",
-					Response.Status.SERVICE_UNAVAILABLE);
+	public Response getBook(@PathParam("bookid") String bookid,@Context Request request) {
+
+		//Creamos CacheControl
+		CacheControl cc= new CacheControl();
+
+		//Sacamos un book de la base de datos
+		Book book = getBookFromDatabase(bookid);
+
+		//Calculamos ETag de la ultima modificación de la reseña
+
+		String s= book.getReviews()+book.getAuthor()+book.getEdition()+"21";
+
+
+		EntityTag eTag = new EntityTag(Long.toString(s.hashCode()));
+
+
+		//Comparamos el eTag creado con el que viene de la peticiOn HTTP
+		Response.ResponseBuilder rb = request.evaluatePreconditions(eTag);// comparamos
+
+		if (rb != null) {// Si el resultado no es nulo, significa que no ha sido modificado el contenido ( o es la 1º vez )
+				return rb.cacheControl(cc).tag(eTag).build();
 		}
-	 
-		PreparedStatement stmt = null;
-		
-		try{
-			stmt = conn.prepareStatement(GET_BOOK_ID);
-			stmt.setInt(1, Integer.valueOf(id));
-			System.out.println(stmt);
-			ResultSet rs = stmt.executeQuery();
-			if (rs.next()) {
-				book.setBookid(rs.getInt("bookid"));
-				book.setTittle(rs.getString("tittle"));
-				book.setAuthor(rs.getString("author"));
-				book.setEdition(rs.getString("edition"));
-				book.setEditorial(rs.getString("editorial"));
-				book.setEditiondate(rs.getDate("editiondate"));
-				book.setDateprint(rs.getDate("dateprint"));
-				book.setLanguage(rs.getString("lengua"));
-			}
-				
-				else{
-					throw new NotFoundException("There's no libro with bookid =" + id);
-				}
-		}
-			catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					if (stmt != null)
-						stmt.close();
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		System.out.println(book);
-			  return book;
+
+
+		// Si es nulo construimos la respuesta de cero.
+		rb = Response.ok(book).cacheControl(cc).tag(eTag);
+
+		return rb.build();
+
 	}
 	private Book getBookFromDatabase(String bookid) {
 		Book book = new Book();
