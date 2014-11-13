@@ -159,8 +159,7 @@ public class BooksResource {
 				return books;
 			}
 	private String GET_REVIEWS_BY_ID = " SELECT * from reviews where bookid = ?;";
-
-	private Book getLibroFromDatabase(String id) {
+	private Book getLibroFromDatabase(String bookid) {
 		Book book = new Book();
 
 		Connection conn = null;
@@ -176,7 +175,7 @@ public class BooksResource {
 		try {
 			// cojemos libros
 			stmt = conn.prepareStatement(GET_BOOK_ID);
-			stmt.setInt(1, Integer.valueOf(id));
+			stmt.setInt(1, Integer.valueOf(bookid));
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				book.setBookid(rs.getInt("bookid"));
@@ -189,7 +188,7 @@ public class BooksResource {
 				book.setEditorial(rs.getString("editorial"));
 			} else {
 				throw new NotFoundException(
-						"No se encuentra ningun libro con ID =" + id);
+						"No se encuentra ningun libro con ID =" + bookid);
 			}
 			/*
 			 * //cojemos resenas stmt2=conn.prepareStatement(GET_RESENA_BY_ID);
@@ -422,7 +421,7 @@ public class BooksResource {
 		}
 		
 	}
-	private String UPDATE_LIBRO = "UPDATE book set tittle=ifnull(?, tittle), author=ifnull(?, author), language=ifnull(?, language), edition=ifnull(?,edition), editiondate=ifnull(?, editiondate), printdate=ifnull(?, printdate), editorial=ifnull(?, editorial) where idauthor =?;";
+	private String UPDATE_LIBRO = "UPDATE book set tittle=ifnull(?, tittle), author=ifnull(?, author), language=ifnull(?, language), edition=ifnull(?,edition), editiondate=ifnull(?, editiondate), dateprint=ifnull(?, dateprint), editorial=ifnull(?, editorial) where idauthor =?;";
 	@PUT//metodo para actualizar la ficha de un libro
 	@Path("/{bookid}")
 	@Consumes(MediaType.BOOKS_API_BOOK)
