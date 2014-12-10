@@ -182,7 +182,7 @@ public class BooksResource {
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				book.setBookid(rs.getInt("bookid"));
-				book.setTittle(rs.getString("tittlo"));
+				book.setTittle(rs.getString("tittle"));
 				book.setAuthor(rs.getString("author"));
 				book.setLanguage(rs.getString("language"));
 				book.setEdition(rs.getString("edition"));

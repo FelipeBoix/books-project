@@ -10,5 +10,6 @@ public class BooksRootAPIResource {
 	public BookRootAPI getRootAPI() {
 		BookRootAPI api = new BookRootAPI();
 		return api;
+	
 	}
 }

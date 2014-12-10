@@ -1,12 +1,24 @@
 package edu.upc.eetac.dsa.FelipeBoix.books.api.model;
 
 import java.sql.Date;
+import org.glassfish.jersey.linking.Binding;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.core.Link;
 
+import org.glassfish.jersey.linking.InjectLink;
+import org.glassfish.jersey.linking.InjectLinks;
+import org.glassfish.jersey.linking.InjectLink.Style;
+
+import edu.upc.eetac.dsa.FelipeBoix.books.api.BooksResource;
+import edu.upc.eetac.dsa.FelipeBoix.books.api.BooksRootAPIResource;
+import edu.upc.eetac.dsa.FelipeBoix.books.api.MediaType;
+
 public class Book {
+	@InjectLinks({
+		@InjectLink(resource = BooksResource.class, style = Style.ABSOLUTE, rel = "stings", title = "Latest stings", type = MediaType.BOOK_API_BOOKS_COLLECTION),
+		@InjectLink(resource = BooksResource.class, style = Style.ABSOLUTE, rel = "self edit", title = "Sting", type = MediaType.BOOKS_API_BOOK, method = "getBooks", bindings = @Binding(name = "stingid", value = "${instance.stingid}")) })
 	
 	private int bookid;
 	private String tittle;
