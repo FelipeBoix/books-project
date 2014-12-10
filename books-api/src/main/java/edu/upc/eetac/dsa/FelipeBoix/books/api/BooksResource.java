@@ -71,6 +71,7 @@ public class BooksResource {
 				book.setDateprint(rs.getDate("printdate"));
 				
 				books.add(book);
+			
 			}
 			
 		} catch (SQLException e) {
