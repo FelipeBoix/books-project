@@ -1,7 +1,7 @@
-Books
-Books is an application to manage books.
 
-System requirements
+Dentro de books-project se encuentra books-api y Books-android
+
+
 
 To install Books you must have installed:
 
@@ -12,9 +12,3 @@ Apache
 MySQL
 Installation
 
-Clone this project and follow the instructions of each one of the individual subprojects:
-
-sql
-www
-libros-server
-libros-android
