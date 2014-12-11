@@ -17,9 +17,10 @@ import edu.upc.eetac.dsa.FelipeBoix.books.api.MediaType;
 
 public class Book {
 	@InjectLinks({
-		@InjectLink(resource = BooksResource.class, style = Style.ABSOLUTE, rel = "stings", title = "Latest stings", type = MediaType.BOOK_API_BOOKS_COLLECTION),
-		@InjectLink(resource = BooksResource.class, style = Style.ABSOLUTE, rel = "self edit", title = "Sting", type = MediaType.BOOKS_API_BOOK, method = "getBooks", bindings = @Binding(name = "stingid", value = "${instance.stingid}")) })
-	
+		@InjectLink(resource = BooksResource.class, style = Style.ABSOLUTE, rel = "self edit", title = "Book", type = MediaType.BOOKS_API_BOOK, method = "getBook", bindings = @Binding(name = "bookid", value = "${instance.id}")), 
+		@InjectLink(resource = BooksResource.class, style = Style.ABSOLUTE, rel = "create-book", title = "Create Book", type = MediaType.BOOKS_API_BOOK, method = "createBook"), 
+		@InjectLink(resource = BooksResource.class, style = Style.ABSOLUTE, rel = "search author", title = "Search", type = MediaType.BOOKS_API_BOOK, method = "getBookbytitleAuthor", bindings ={ @Binding(name = "author", value = "${instance.author}"),@Binding(name = "tittle", value = "${instance.tittle}")}) 
+	})
 	private int bookid;
 	private String tittle;
 	private String author;

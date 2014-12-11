@@ -16,7 +16,7 @@ import edu.upc.eetac.dsa.FelipeBoix.books.api.MediaType;
 
 public class BookRootAPI {
 	@InjectLinks({
-		@InjectLink(resource = BooksRootAPIResource.class, style = Style.ABSOLUTE, rel = "self bookmark home", title = "Books Root API", method = "getRootAPI"),
+		@InjectLink(resource = BooksRootAPIResource.class, style = Style.ABSOLUTE, rel = "self bookmark home", title = "BooksRootAPI", method = "getRootAPI"),
 		@InjectLink(resource = BooksResource.class, style = Style.ABSOLUTE, rel = "stings", title = "Latest stings", type = MediaType.BOOK_API_BOOKS_COLLECTION),
 		@InjectLink(resource = BooksResource.class, style = Style.ABSOLUTE, rel = "create-stings", title = "Latest stings", type = MediaType.BOOKS_API_BOOK) })
 	
